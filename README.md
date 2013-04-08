@@ -1,6 +1,6 @@
 # Multiblock
 
-TODO: Write a gem description
+Ruby methods can accept only one block at a time. Multiblock helps to build multiple-block wrappers that can be passed to Ruby methods in pleasant way.
 
 ## Installation
 
@@ -18,7 +18,73 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Register blocks simply by calling methods on a multiblock instance and passing actual Ruby callable objects (procs, lamdas, etc.) along:
+
+    multiblock = Multiblock.new
+    multiblock.foo { "foo" }
+    multiblock.bar { |arg| "bar with #{arg}"}
+
+Then call registered blocks:
+
+    multiblock.call(:foo)
+    # => "foo"
+
+    multiblock.call(:bar, "argument")
+    # => "bar with argument"
+
+When calling a block under unregistered name `nil` is returned by default:
+
+    multiblock.call(:bar)
+    # => nil
+
+But you can supply a block that will be called by default in place of unregistered one:
+
+    multiblock = Multiblock.new { "default" }
+    multiblock.call(:bar)
+    # => "default"
+
+## Real world example
+
+Multiblock shines in situations when you would like to pass multiple blocks to a method. Perhaps to handle its different outcomes.
+
+Since Ruby methods accepts only one block at a time, we simulate passing multiple blocks with this nice-looking syntax:
+
+    process(message) do |on|
+      on.success { puts "ok" }
+      on.failure { puts "fail" }
+    end
+
+To make it work, let's define `process` method in following way:
+
+    def process(message)
+      multiblock = Multiblock.new
+
+      # wrap blocks
+      yield(multiblock)
+
+      # do actual processing...
+
+      if result == "success"
+        multiblock.call(:success)
+      else
+        multiblock.call(:failure)
+      end
+    end
+
+Another example which kinda resembles `respond_with` feature from Ruby on Rails `ActionController`:
+
+    def respond_with(object)
+      multiblock = Multiblock.new
+      yield(multiblock)
+
+      # assume that request.format returns either 'json' or 'xml'
+      multiblock.call(request.format, object)
+    end
+
+    respond_with(object) do |format|
+      format.xml  { |object| render :xml  => object.to_xml  }
+      format.json { |object| render :json => object.to_json }
+    end
 
 ## Contributing
 
