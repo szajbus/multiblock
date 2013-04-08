@@ -1,5 +1,7 @@
 # Multiblock
 
+[![Build Status](https://secure.travis-ci.org/monterail/multiblock.png)](http://travis-ci.org/monterail/multiblock)
+
 Ruby methods can accept only one block at a time. Multiblock helps to build multiple-block wrappers that can be passed to Ruby methods in pleasant way.
 
 ## Installation
