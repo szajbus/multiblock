@@ -29,10 +29,13 @@ describe Multiblock do
     multiblock.call(:foo, "foo").should == "foo"
   end
 
-  it "should raise ArgumentError exception when registering without block" do
-    lambda {
-      multiblock.foo
-    }.should raise_exception(ArgumentError, "No block given when registering 'foo' block.")
+  it "should return the default when calling without a previously defined block" do
+    expect( multiblock.bar ).to eq(nil)
+  end
+
+  it "should call the previously defined block if called without a block" do
+    multiblock.bar { |arg| arg }
+    expect( multiblock.bar("foo") ).to eq("foo")
   end
 
   context "with custom default block" do

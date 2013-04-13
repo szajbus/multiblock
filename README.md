@@ -67,9 +67,9 @@ To make it work, let's define `process` method in following way:
       # do actual processing...
 
       if result == "success"
-        multiblock.call(:success)
+        multiblock.success
       else
-        multiblock.call(:failure)
+        multiblock.failure
       end
     end
 
