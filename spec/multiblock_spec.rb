@@ -34,7 +34,7 @@ describe Multiblock do
   end
 
   it "should call the previously defined block if called without a block" do
-    multiblock.foo { |arg| arg }
+    multiblock.bar { |arg| arg }
     expect( multiblock.bar("foo") ).to eq("foo")
   end
 
