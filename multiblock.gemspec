@@ -1,10 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require "multiblock/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "multiblock"
-  spec.version       = "0.1.0"
+  spec.version       = Multiblock::VERSION
   spec.authors       = ["Michał Szajbe"]
   spec.email         = ["michal.szajbe@gmail.com"]
   spec.description   = %q{Ruby methods can accept only one block at a time. Multiblock helps to build multiple-block wrappers that can be passed to Ruby methods in pleasant way.}

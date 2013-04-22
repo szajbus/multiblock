@@ -1,3 +1,5 @@
+require "multiblock/version"
+
 module Multiblock
   if defined?(BasicObject)
     BasicObject = ::BasicObject
