@@ -1,4 +1,4 @@
-Copyright (c) 2013 TODO: Write your name
+Copyright (c) 2013 Michał Szajbe, Monterail.com
 
 MIT License
 
