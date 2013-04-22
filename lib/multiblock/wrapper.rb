@@ -1,13 +1,13 @@
 module Multiblock
-  class Wrapper
+  class Wrapper < BasicObject
     def initialize(&default)
-      default ||= lambda { |*args| nil }
+      default ||= ::Kernel.lambda { |*args| nil }
 
-      @blocks = Hash.new(default)
+      @blocks = ::Hash.new(default)
     end
 
     def method_missing(name, *args, &blk)
-      raise ArgumentError.new("No block given when registering '#{name}' block.") if blk.nil?
+      ::Kernel.raise ::ArgumentError.new("No block given when registering '#{name}' block.") if blk.nil?
       @blocks[name.to_s] = blk
     end
 
