@@ -20,29 +20,36 @@ Or install it yourself as:
 
 ## Usage
 
-Register blocks simply by calling methods on a multiblock instance and passing actual Ruby callable objects (procs, lamdas, etc.) along:
+Obtain multiblock wrapper instance
 
-    multiblock = Multiblock.new
-    multiblock.foo { "foo" }
-    multiblock.bar { |arg| "bar with #{arg}"}
+    wrapper = Multiblock::Wrapper.new
+
+    # or via shortcut
+    wrapper = Multiblock.wrapper
+
+Register blocks simply by calling methods on a multiblock wrapper instance and passing actual Ruby callable objects (procs, lamdas, etc.) along:
+
+    wrapper = Multiblock.wrapper
+    wrapper.foo { "foo" }
+    wrapper.bar { |arg| "bar with #{arg}"}
 
 Then call registered blocks:
 
-    multiblock.call(:foo)
+    wrapper.call(:foo)
     # => "foo"
 
-    multiblock.call(:bar, "argument")
+    wrapper.call(:bar, "argument")
     # => "bar with argument"
 
 When calling a block under unregistered name `nil` is returned by default:
 
-    multiblock.call(:bar)
+    wrapper.call(:bar)
     # => nil
 
 But you can supply a block that will be called by default in place of unregistered one:
 
-    multiblock = Multiblock.new { "default" }
-    multiblock.call(:bar)
+    wrapper = Multiblock.wrapper { "default" }
+    wrapper.call(:bar)
     # => "default"
 
 ## Real world example
@@ -59,28 +66,28 @@ Since Ruby methods accepts only one block at a time, we simulate passing multipl
 To make it work, let's define `process` method in following way:
 
     def process(message)
-      multiblock = Multiblock.new
+      wrapper = Multiblock.wrapper
 
       # wrap blocks
-      yield(multiblock)
+      yield(wrapper)
 
       # do actual processing...
 
       if result == "success"
-        multiblock.call(:success)
+        wrapper.call(:success)
       else
-        multiblock.call(:failure)
+        wrapper.call(:failure)
       end
     end
 
 Another example which kinda resembles `respond_with` feature from Ruby on Rails `ActionController`:
 
     def respond_with(object)
-      multiblock = Multiblock.new
-      yield(multiblock)
+      wrapper = Multiblock.new
+      yield(wrapper)
 
       # assume that request.format returns either 'json' or 'xml'
-      multiblock.call(request.format, object)
+      wrapper.call(request.format, object)
     end
 
     respond_with(object) do |format|
