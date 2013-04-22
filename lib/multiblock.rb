@@ -19,8 +19,8 @@ module Multiblock
   end
 
   class << self
-    def wrapper(*args)
-      Wrapper.new(*args)
+    def wrapper(*args, &blk)
+      Wrapper.new(*args, &blk)
     end
   end
 end
