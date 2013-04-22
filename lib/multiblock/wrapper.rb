@@ -14,6 +14,10 @@ module Multiblock
     def call(name, *args)
       @blocks[name.to_s].call(*args)
     end
+
+    def inspect
+      "#<Multiblock::Wrapper @blocks=#{@blocks.inspect}>"
+    end
   end
 end
 
