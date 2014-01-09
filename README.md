@@ -83,7 +83,7 @@ To make it work, let's define `process` method in following way:
 Another example which kinda resembles `respond_with` feature from Ruby on Rails `ActionController`:
 
     def respond_with(object)
-      wrapper = Multiblock.new
+      wrapper = Multiblock.wrapper
       yield(wrapper)
 
       # assume that request.format returns either 'json' or 'xml'
