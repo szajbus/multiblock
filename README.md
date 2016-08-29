@@ -1,6 +1,6 @@
 # Multiblock
 
-[![Build Status](https://secure.travis-ci.org/monterail/multiblock.png)](http://travis-ci.org/monterail/multiblock) [![Code Climate](https://codeclimate.com/github/monterail/multiblock.png)](https://codeclimate.com/github/monterail/multiblock)
+[![Build Status](https://secure.travis-ci.org/humante/multiblock.png)](http://travis-ci.org/humante/multiblock) [![Code Climate](https://codeclimate.com/github/humante/multiblock.png)](https://codeclimate.com/github/humante/multiblock)
 
 Ruby methods can accept only one block at a time. Multiblock helps to build multiple-block wrappers that can be passed to Ruby methods in pleasant way.
 

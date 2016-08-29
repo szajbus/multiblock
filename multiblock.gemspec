@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["michal.szajbe@gmail.com"]
   spec.description   = %q{Ruby methods can accept only one block at a time. Multiblock helps to build multiple-block wrappers that can be passed to Ruby methods in pleasant way.}
   spec.summary       = %q{Pass multiple blocks to Ruby methods with style}
-  spec.homepage      = "http://github.com/monterail/multiblock"
+  spec.homepage      = "http://github.com/humante/multiblock"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
